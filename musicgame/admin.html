@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>video</title>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset="utf-8">
+    <style>
+        .lrc{
+            width: 90%;
+            height: 200px;
+            background: #f3ecec;
+            color: #1a0202;
+            margin: 0 auto;
+            font-size: 30px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lrc" id="lrc">
+
+    </div>
+</body>
+<script>
+    var _lrc = document.getElementById("lrc"); //歌词
+    // 获取缓存
+    setInterval(function(){
+        var msg = window.localStorage.getItem("_media_mp3");
+        _lrc.innerHTML = msg;
+    },300)
+    
+
+</script>
+</html>

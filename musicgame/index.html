@@ -1,0 +1,129 @@
+<html>
+
+<head>
+    <title>video</title>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-color: #218e95;
+        }
+
+        .main {
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .video {}
+
+        .video video {
+            height: 32PX;
+            width: 100%;
+        }
+
+        .list {
+            height: 30px;
+            margin: 20 auto;
+        }
+
+        .list span {
+            padding: 5px;
+            font-size: 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            color: #FFF;
+            border: solid 1px #FFF;
+            border-radius: 5px;
+        }
+
+        .but {
+            height: 50px;
+            margin: 0 auto;
+        }
+
+        .but span {
+            padding: 5px;
+            font-size: 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            color: #218e95;
+            border: solid 1px #FFF;
+            border-radius: 5px;
+            background-color: #FFF;
+        }
+
+        .lrc {
+            height: 200px;
+            background: #FFF;
+            color: #FFF;
+            margin: 0 auto;
+            font-size: 30px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+
+        <div class="list" id="list"></div>
+        <div class="but" id="but"></div>
+
+        <div class="lrc" id="lrc"></div>
+        <div class="video">
+            <video id="video" controls=true src=''></video>
+        </div>
+    </div>
+</body>
+<script src="data.js"></script>
+<script>
+    var _but = document.getElementById("but"); //按钮
+    var _myVid = document.getElementById("video"); //播放器
+    var _lrc = document.getElementById("lrc"); //歌词
+    var _list = document.getElementById("list"); //列表
+    var _nowbut = {};
+    _myVid.addEventListener("timeupdate", timeupdate);
+    //初始化
+    //1.清空列表
+    _list.innerHTML = "";
+
+    for (var i = 0; i < mediaData.length; i++) {
+        _list.innerHTML += '<span onclick="_listClick(this)" index=' + i + '>第' + (i + 1) + '首</span>';
+    }
+
+    //列表点击
+    function _listClick(t) {
+        t.style.backgroundColor='#aaa';
+        var index = t.getAttribute('index');
+        _myVid.src = mediaData[index].soure;
+        _nowbut = mediaData[index].but;
+        _but.innerHTML = "";
+        for (var i = 0; i < _nowbut.length; i++) {
+            _but.innerHTML += '<span onclick="playMedia(' + i + ',' + _nowbut[i].start + ',' + _nowbut[i].end + ')" >' + _nowbut[i].title + '</span>'
+        }
+    }
+
+    //定点播放
+    var _endTime = null;
+    function playMedia(t, startTime, endTime) {
+        //设置歌词
+        var gc = _nowbut[t].after;
+        _lrc.innerHTML = gc;
+        window.localStorage.setItem("_media_mp3", gc);
+        _endTime = endTime || null;
+        _myVid.currentTime = startTime;
+        _myVid.play();
+    }
+    //暂停
+    function timeupdate() {
+        var time = _myVid.currentTime + "";
+        var ts = time.substring(0, time.indexOf("."));
+        if (ts == _endTime) {
+            _myVid.pause();
+            _endTime = null;
+        }
+    }
+</script>
+
+</html>
