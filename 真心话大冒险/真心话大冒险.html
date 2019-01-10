@@ -1,0 +1,155 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>真心话大冒险</title>
+    <style type="text/css">
+        #main {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #content {
+            width: 960px;
+            margin: 0 auto;
+        }
+
+        #content span {
+            text-align：center;
+        }
+
+        #quest {
+            width: 100%;
+            min-height:305px;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 2px solid #cf6600;
+            box-shadow: 0px 5px 5px #894401;
+            padding: 40px;
+            font-size: 70px;
+            font-weight: 520;
+            line-height: 110px;
+            color: #036b9f;
+            font-family: "雅黑";
+        }
+
+        #but {
+            height: 50px;
+            width: 960px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        #but div {
+            float: left;
+            font-size: 30px;
+            padding: 18px;
+            background: #cf6600;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 20px;
+            border: 2px solid #cf6600;
+            box-shadow: 5px 5px 5px #894401;
+            font-weight: 520;
+            color: #fff;
+        }
+
+        #zxh {
+            width: 420px;
+        }
+
+        #dmx {
+            width: 420px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="content">
+            <div id="quest">
+                真心话大冒险
+            </div>
+            <div id="media">
+                
+            </div>
+        </div>
+        <div id="but">
+            <div id="zxh" onclick="que('zxh',this)">真心话</div>
+            <div id="dmx" onclick="que('dmx',this)">大冒险</div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+    var dsq = null;
+    var flage = false;
+    function que(type, t) {
+        flage = !flage;
+        if (flage) {
+            dsq = setInterval(function () {
+                var index = parseInt(quest[type].length * Math.random());
+                document.getElementById("quest").innerHTML = (quest[type][index].text);
+                if (quest[type][index].background) {
+                    document.getElementById("quest").style.background = quest[type][index].background;
+                }
+            }, 200);
+        } else {
+            clearInterval(dsq);
+        }
+    }
+
+    var quest = {};
+    quest.zxh = [
+        {
+            text: '最长一次连续睡着了多久'
+        }, {
+            text: '最长多久没洗澡'
+        }, {
+            text: '袜子最长多久没洗'
+        }, {
+            text: '你觉得你哪里最好看'
+        }, {
+            text: ' 情人节最想收到什么礼物'
+        }, {
+            text: '2017年让你觉得最伤心的事情是什么？'
+        }, {
+            text: '你通常用那只指头挖鼻子？ '
+        }, {
+            text: '结婚后希望生男孩还是女孩(只能选择一个，说出原因)。'
+        }, {
+            text: '你最怕的事情或东西是什么（说出三件）'
+        }, {
+            text: '从小到大最丢脸出丑的事情是什么？'
+        }, {
+            text: '如果给你一个机会去世界上任何一个地方旅行你会去?'
+        }
+    ]
+    quest.dmx = [
+        {
+            text: '洗头洗到一半全是泡沫，突然停水了你会怎么办？（表演)'
+        }, {
+            text: ' 如果让你扮演电影或电视剧里面的坏人，想演谁？（表演招牌动作）'
+        }, {
+            text: '如果从天而降99枚金币，你的第一反应是什么？（主持人模拟扔金币，让观众表演）'
+        }, {
+            text: '用3种不同的表情表演，看到银行卡突然多了100w'
+        }, {
+            text: '唱青藏高原最后一句（歌词：那就是青藏高~~~~~原）'
+        }, {
+            text: '说绕口令：黑化肥发灰,灰化肥发黑.黑化肥发黑不发灰,灰化肥发灰不发黑'
+        }, {
+            text: '说绕口令：粉红墙上画凤凰，凤凰画在粉红墙。 红凤凰、粉凤凰，红粉凤凰、花凤凰'
+        }, {
+            text: '如果你进入监狱，表演抓着铁门摇晃并大喊“放我出去！” 5次（主持人当铁门）'
+        }, {
+            text: '表演吃柠檬'
+        }, {
+            text: '做出投降的姿势，下蹲5次并大喊“我投降，下次不敢了” '
+        }
+    ];
+
+</script>
