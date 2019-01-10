@@ -94,7 +94,7 @@
 
     //列表点击
     function _listClick(t) {
-        t.style.backgroundColor='#aaa';
+        t.style.backgroundColor = '#aaa';
         var index = t.getAttribute('index');
         _myVid.src = mediaData[index].soure;
         _nowbut = mediaData[index].but;
@@ -109,19 +109,23 @@
     function playMedia(t, startTime, endTime) {
         //设置歌词
         var gc = _nowbut[t].after;
+        _lrc.style.color = '#FFF';
         _lrc.innerHTML = gc;
-        window.localStorage.setItem("_media_mp3", gc);
-        _endTime = endTime || null;
+        if (_nowbut[t].show) {
+            _lrc.style.color = '#000';
+        }
+        window.localStorage.setItem("_media_mp3", _nowbut[t].ans || gc);
+        _endTime = endTime || 999999;
         _myVid.currentTime = startTime;
         _myVid.play();
     }
     //暂停
     function timeupdate() {
-        var time = _myVid.currentTime + "";
-        var ts = time.substring(0, time.indexOf("."));
-        if (ts == _endTime) {
+        var time = _myVid.currentTime;
+        console.log(time);
+        if (time >= _endTime) {
             _myVid.pause();
-            _endTime = null;
+            _endTime = 9999999999;
         }
     }
 </script>
